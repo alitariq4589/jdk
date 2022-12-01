@@ -5,6 +5,9 @@ node ('x86_runner2'){
     stage('60s Sleep') {
         sleep(time:60, unit:'SECONDS')
     }
+	stage('Checkout x86'){
+		checkout scm
+	}
     stage('Configure'){
         sh'''
             mkdir -p "$HOME/JDK_BUILD"
