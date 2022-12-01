@@ -1,0 +1,24 @@
+node ('x86_runner2'){
+    stage ('Cleanup'){
+        cleanWs()
+    }
+    stage('60s Sleep') {
+        sleep(time:60, unit:'SECONDS')
+    }
+    stage('Configure'){
+        sh'''
+            mkdir -p "$HOME/JDK_BUILD"
+            bash configure --prefix=$HOME/JDK_BUILD
+        '''
+    }
+    stage('Build'){
+        sh'''
+            make
+        '''
+    }
+    stage('INSTALL'){
+        sh'''
+            make install
+        '''
+    }
+}
