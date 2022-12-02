@@ -8,18 +8,46 @@ node ('x86_runner2'){
 	stage('Checkout x86'){
 		checkout scm
 	}
-    stage('Configure'){
+    stage('Configure x86'){
         sh'''
             mkdir -p "$HOME/JDK_BUILD"
             bash configure --prefix=$HOME/JDK_BUILD
         '''
     }
-    stage('Build'){
+    stage('Build x86'){
         sh'''
             make
         '''
     }
-    stage('INSTALL'){
+    stage('INSTALL x86'){
+        sh'''
+            make install
+        '''
+    }
+}
+
+node ('riscv64_runner1'){
+    stage ('Cleanup'){
+        cleanWs()
+    }
+    stage('60s Sleep') {
+        sleep(time:60, unit:'SECONDS')
+    }
+	stage('Checkout QEMU Linux'){
+		checkout scm
+	}
+    stage('Configure QEMU Linux'){
+        sh'''
+            mkdir -p "$HOME/JDK_BUILD"
+            bash configure --prefix=$HOME/JDK_BUILD
+        '''
+    }
+    stage('Build QEMU Linux'){
+        sh'''
+            make
+        '''
+    }
+    stage('INSTALL QEMU Linux'){
         sh'''
             make install
         '''
