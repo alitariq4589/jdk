@@ -39,7 +39,7 @@ node ('riscv64_runner1'){
     stage('Configure QEMU Linux'){
         sh'''
             mkdir -p "$HOME/JDK_BUILD"
-            bash configure --prefix=$HOME/JDK_BUILD
+            bash configure --prefix=$HOME/softwares/jdk
         '''
     }
     stage('Build QEMU Linux'){
